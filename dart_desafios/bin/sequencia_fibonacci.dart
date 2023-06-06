@@ -7,7 +7,7 @@ Implemente a sequencia fibonacci com funcões recursivamente usando o Dart.
 */
 
 void main(List<String> args) {
-  var maxNumber = 200;
+  var maxNumber = 144;
   var lastNumber = 1;
   var previousNumber = 0;
   var fibonacciText = "";
@@ -24,7 +24,7 @@ String sequenciaFibonacci(
   int previousNumber = 0,
   String fibonacciText = "",
 }) {
-  if (lastNumber >= 1 && lastNumber <= maxNumber) {
+  if ((lastNumber + previousNumber) <= maxNumber) {
     if (lastNumber == 1 && previousNumber == 0) {
       fibonacciText += "0 1";
     }
