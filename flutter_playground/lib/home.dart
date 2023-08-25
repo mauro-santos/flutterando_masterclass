@@ -29,6 +29,7 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.sizeOf(context);
+    final isCollapsed = size.width < 500;
 
     return Scaffold(
       appBar: AppBar(
@@ -40,17 +41,11 @@ class _HomePageState extends State<HomePage> {
         width: size.width,
         child: Row(
           children: [
-            ConstrainedBox(
-              constraints: const BoxConstraints(
-                maxWidth: 100.0,
+            if (!isCollapsed)
+              Container(
+                width: 200.0,
+                color: Colors.amber,
               ),
-              child: Expanded(
-                flex: 1,
-                child: Container(
-                  color: Colors.red,
-                ),
-              ),
-            ),
             Expanded(
               flex: 2,
               child: Column(
