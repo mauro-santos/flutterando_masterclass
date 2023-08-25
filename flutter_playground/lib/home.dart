@@ -8,39 +8,47 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  final models = [
+    const CardModel(
+      name: 'Mauro A. Santos',
+      urlImage:
+          'https://media.licdn.com/dms/image/D4D03AQHRCbj1hD5uFg/profile-displayphoto-shrink_800_800/0/1690832740659?e=1698278400&v=beta&t=Z7wLdhQXsxHdD8n0G2Tb4d6cqXKmSagEThVo2Ydf4mI',
+    ),
+    const CardModel(
+      name: 'Julio Macedo',
+      urlImage:
+          'https://media.licdn.com/dms/image/C4D03AQGZ3IJO5J0LeA/profile-displayphoto-shrink_800_800/0/1575557698635?e=1698278400&v=beta&t=pE5lBK8deRqZIhBv_Wl3cghTAUtVE2qQ9vlyoRFk7Ok',
+    ),
+    const CardModel(
+      name: 'Vanessa Santos',
+      urlImage:
+          'https://media.licdn.com/dms/image/D4D03AQGW0SmgXMefEA/profile-displayphoto-shrink_800_800/0/1666653051098?e=1698278400&v=beta&t=tVkPk0ZASTtUdw8r77TGzi8I8ZB6-WnD30mo971yFyg',
+    ),
+  ];
+
   @override
   Widget build(BuildContext context) {
+    final size = MediaQuery.sizeOf(context);
+
     return Scaffold(
       appBar: AppBar(
         title: const Text("Flutter Playground"),
         centerTitle: false,
         elevation: 1.0,
       ),
-      body: const Column(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        children: [
-          CustomCard(
-            model: CardModel(
-              name: 'Mauro A. Santos',
-              urlImage:
-                  'https://media.licdn.com/dms/image/D4D03AQHRCbj1hD5uFg/profile-displayphoto-shrink_800_800/0/1690832740659?e=1698278400&v=beta&t=Z7wLdhQXsxHdD8n0G2Tb4d6cqXKmSagEThVo2Ydf4mI',
-            ),
-          ),
-          CustomCard(
-            model: CardModel(
-              name: 'Julio Macedo',
-              urlImage:
-                  'https://media.licdn.com/dms/image/C4D03AQGZ3IJO5J0LeA/profile-displayphoto-shrink_800_800/0/1575557698635?e=1698278400&v=beta&t=pE5lBK8deRqZIhBv_Wl3cghTAUtVE2qQ9vlyoRFk7Ok',
-            ),
-          ),
-          CustomCard(
-            model: CardModel(
-              name: 'Vanessa Santos',
-              urlImage:
-                  'https://media.licdn.com/dms/image/D4D03AQGW0SmgXMefEA/profile-displayphoto-shrink_800_800/0/1666653051098?e=1698278400&v=beta&t=tVkPk0ZASTtUdw8r77TGzi8I8ZB6-WnD30mo971yFyg',
-            ),
-          ),
-        ],
+      body: SizedBox(
+        width: size.width,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            for (var model in models)
+              ConstrainedBox(
+                constraints: const BoxConstraints(maxWidth: 300.0),
+                child: CustomCard(model: model),
+              ),
+          ],
+        ),
       ),
     );
   }
