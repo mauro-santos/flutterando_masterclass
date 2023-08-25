@@ -38,15 +38,33 @@ class _HomePageState extends State<HomePage> {
       ),
       body: SizedBox(
         width: size.width,
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          crossAxisAlignment: CrossAxisAlignment.center,
+        child: Row(
           children: [
-            for (var model in models)
-              ConstrainedBox(
-                constraints: const BoxConstraints(maxWidth: 300.0),
-                child: CustomCard(model: model),
+            ConstrainedBox(
+              constraints: const BoxConstraints(
+                maxWidth: 100.0,
               ),
+              child: Expanded(
+                flex: 1,
+                child: Container(
+                  color: Colors.red,
+                ),
+              ),
+            ),
+            Expanded(
+              flex: 2,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  for (var model in models)
+                    ConstrainedBox(
+                      constraints: const BoxConstraints(maxWidth: 300.0),
+                      child: CustomCard(model: model),
+                    ),
+                ],
+              ),
+            ),
           ],
         ),
       ),
