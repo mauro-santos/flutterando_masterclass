@@ -1,36 +1,40 @@
+import 'dart:convert';
+
 import 'package:dio/dio.dart';
 import 'package:http/http.dart' as http;
 
 void main(List<String> args) {
-  execute(DioJsonService());
-  execute(HttpJsonService());
+  consume(DioJsonService());
+  consume(HttpJsonService());
 }
 
-void execute(JsonService service) {
-  service.getJson();
+void consume(JsonService service) async {
+  final data = await service.fetchJson();
+  print(data);
 }
 
 abstract class JsonService {
-  void getJson();
+  Future<Map> fetchJson();
 }
 
 class DioJsonService implements JsonService {
   final dio = Dio();
 
   @override
-  void getJson() async {
-    var response =
+  Future<Map> fetchJson() async {
+    final response =
         await dio.get('https://jsonplaceholder.typicode.com/todos/1');
-    print(response.data.toString());
+
+    return response.data;
   }
 }
 
 class HttpJsonService implements JsonService {
   @override
-  void getJson() async {
-    var response = await http
+  Future<Map> fetchJson() async {
+    final response = await http
         .get(Uri.parse('https://jsonplaceholder.typicode.com/todos/1'));
 
-    print(response.body);
+    return jsonDecode(response.body);
   }
 }
